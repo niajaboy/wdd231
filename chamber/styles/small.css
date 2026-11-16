@@ -69,7 +69,7 @@ header .site-title {
 #menu {
     font-size: 1.5rem;
     border: 0;
-    background: none;
+    background: var(--primary-color);
     color: var(--card-bg);
     position: absolute;
     top: 1.5rem;
@@ -387,7 +387,7 @@ main h1,
 
 .modal-close {
     font-size: 1.25rem;
-    background: none;
+    background: var(--card-bg);
     border: 1px solid var(--input-border);
     border-radius: 4px;
     padding: 0.2rem 0.6rem;
