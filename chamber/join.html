@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Apply for membership with the Jos Chamber of Commerce and grow your business network." />
+  <meta name="author" content="Nanlung Micheal Longtau" />
+  <title>Join the Chamber | Jos Chamber of Commerce</title>
+    <meta property="og:image" content="https://niajaboy.github.io/wdd231/chamber/images/logo.svg">
+    <meta property="og:url" content="https://niajaboy.github.io/wdd231/chamber/directory.html">
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/small.css">
+    <link rel="stylesheet" href="styles/larger.css">
+    
+  <script src="scripts/join.js" defer></script>
+  
+</head>
+<body>
+  <header>
+        <div class="logo-box">
+            <img src="images/logo.svg" alt="Jos Chamber of Commerce Logo" width="80" height="80">
+            <span class="site-title">Jos Chamber of Commerce</span>
+        </div>
+        
+        <button type="button" id="menu" aria-label="Toggle Menu" aria-expanded="false" aria-controls="primary-nav"></button>
+        <nav aria-label="Primary Navigation">
+            <ul id="primary-nav" class="navigation">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="directory.html" class="active" aria-current="page">Directory</a></li>
+                <li><a href="join.html">Join</a></li>
+                <li><a href="discover.html">Discover</a></li>
+            </ul>
+        </nav>
+    </header>
+
+  <main class="page-main">
+    <section class="page-intro">
+      <h1>Membership application</h1>
+      <p>Connect with local business leaders, unlock training resources, and expand your visibility.</p>
+    </section>
+
+    <div class="join-layout">
+      <!-- Left / Top Column: Single-Column Application Form -->
+      <section class="form-panel" aria-labelledby="form-heading">
+        <h2 id="form-heading" class="visually-hidden">Chamber Membership Form</h2>
+        <p class="form-note">Fields marked with <span class="req-star" aria-hidden="true">*</span> are required.</p>
+
+        <form method="get" action="thankyou.html" class="membership-form">
+          <fieldset class="form-section">
+            <legend>Applicant information</legend>
+
+            <label>
+              <span>First name <span class="req-star" aria-hidden="true">*</span></span>
+              <input
+                type="text"
+                name="firstName"
+                title="Enter your legal or preferred first name"
+                autocomplete="given-name"
+                required
+              />
+            </label>
+
+            <label>
+              <span>Last name <span class="req-star" aria-hidden="true">*</span></span>
+              <input
+                type="text"
+                name="lastName"
+                title="Enter your family or last name"
+                autocomplete="family-name"
+                required
+              />
+            </label>
+
+            <label>
+              <span>Organizational title <span class="optional-tag">(optional)</span></span>
+              <input
+                type="text"
+                name="orgTitle"
+                title="Minimum 7 characters using only letters, hyphens, and spaces"
+                autocomplete="organization-title"
+                pattern="[A-Za-z -]{7,}"
+              />
+              <small class="field-hint">At least 7 characters (letters, spaces, and hyphens only).</small>
+            </label>
+
+            <label>
+              <span>Email address <span class="req-star" aria-hidden="true">*</span></span>
+              <input
+                type="email"
+                name="email"
+                title="Enter a valid business or personal email address"
+                autocomplete="email"
+                placeholder="name@organization.com"
+                required
+              />
+            </label>
+
+            <label>
+              <span>Mobile phone number <span class="req-star" aria-hidden="true">*</span></span>
+              <input
+                type="tel"
+                name="phone"
+                title="Enter your mobile telephone number"
+                autocomplete="tel"
+                required
+              />
+            </label>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Organization &amp; membership</legend>
+
+            <label>
+              <span>Business / organization name <span class="req-star" aria-hidden="true">*</span></span>
+              <input
+                type="text"
+                name="organization"
+                title="Enter the official name of your business or organization"
+                autocomplete="organization"
+                required
+              />
+            </label>
+
+            <label>
+              <span>Membership level <span class="req-star" aria-hidden="true">*</span></span>
+              <select
+                name="membership"
+                title="Choose your desired Chamber membership tier"
+                required
+              >
+                <option value="" disabled selected>Select a membership level...</option>
+                <option value="np">NP Membership — Non-Profit (No Fee)</option>
+                <option value="bronze">Bronze Membership</option>
+                <option value="silver">Silver Membership</option>
+                <option value="gold">Gold Membership</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Business / organization description <span class="optional-tag">(optional)</span></span>
+              <textarea
+                name="description"
+                title="Briefly describe your organization's products, services, or mission"
+                rows="4"
+              ></textarea>
+            </label>
+          </fieldset>
+
+          <!-- Hidden timestamp populated on initial page load -->
+          <input type="hidden" name="timestamp" id="timestamp" />
+
+          <div class="form-submit-row">
+            <input type="submit" value="Apply for Membership" class="btn-submit" />
+          </div>
+        </form>
+      </section>
+
+      <!-- Right / Bottom Column: 4 Membership Level Cards -->
+      <aside class="membership-cards" aria-labelledby="levels-heading">
+        <h2 id="levels-heading">Membership levels</h2>
+
+        <article class="level-card card-np">
+          <h3>Non-Profit Membership</h3>
+          <p class="level-price">Free for registered non-profits</p>
+          <a href="#modal-np" class="card-link" data-modal="modal-np">View NP benefits</a>
+        </article>
+
+        <article class="level-card card-bronze">
+          <h3>Bronze Membership</h3>
+          <p class="level-price">Essential small-business visibility</p>
+          <a href="#modal-bronze" class="card-link" data-modal="modal-bronze">View Bronze benefits</a>
+        </article>
+
+        <article class="level-card card-silver">
+          <h3>Silver Membership</h3>
+          <p class="level-price">Expanded training &amp; event savings</p>
+          <a href="#modal-silver" class="card-link" data-modal="modal-silver">View Silver benefits</a>
+        </article>
+
+        <article class="level-card card-gold">
+          <h3>Gold Membership</h3>
+          <p class="level-price">Premier spotlights &amp; VIP access</p>
+          <a href="#modal-gold" class="card-link" data-modal="modal-gold">View Gold benefits</a>
+        </article>
+      </aside>
+    </div>
+  </main>
+
+  <!-- 4 HTML Dialog Modals for Membership Level Benefits -->
+  <dialog id="modal-np" class="benefit-modal" aria-labelledby="modal-np-title">
+    <div class="modal-header">
+      <h3 id="modal-np-title">Non-Profit (NP) Membership</h3>
+      <button type="button" class="modal-close" aria-label="Close NP Membership modal">&times;</button>
+    </div>
+    <p class="modal-cost"><strong>Annual Fee:</strong> ₦0 (Verification of non-profit status required)</p>
+    <ul>
+      <li>Listing in the online Chamber Member Directory</li>
+      <li>Access to monthly community networking mixers</li>
+      <li>Eligibility to post volunteer and community drives on the Chamber board</li>
+      <li>Quarterly economic &amp; civic policy briefings</li>
+    </ul>
+  </dialog>
+
+  <dialog id="modal-bronze" class="benefit-modal" aria-labelledby="modal-bronze-title">
+    <div class="modal-header">
+      <h3 id="modal-bronze-title">Bronze Membership</h3>
+      <button type="button" class="modal-close" aria-label="Close Bronze Membership modal">&times;</button>
+    </div>
+    <p class="modal-cost"><strong>Annual Fee:</strong> ₦75,000 / year</p>
+    <ul>
+      <li>All Non-Profit tier directory and networking benefits</li>
+      <li>Ribbon-cutting ceremony announcement for new locations</li>
+      <li>10% discount on Chamber workshops and business clinics</li>
+      <li>Member-to-member marketplace discount privileges</li>
+    </ul>
+  </dialog>
+
+  <dialog id="modal-silver" class="benefit-modal" aria-labelledby="modal-silver-title">
+    <div class="modal-header">
+      <h3 id="modal-silver-title">Silver Membership</h3>
+      <button type="button" class="modal-close" aria-label="Close Silver Membership modal">&times;</button>
+    </div>
+    <p class="modal-cost"><strong>Annual Fee:</strong> ₦180,000 / year</p>
+    <ul>
+      <li>All Bronze tier benefits included</li>
+      <li>25% discount on all Chamber training sessions, summits, and trade expos</li>
+      <li>Bi-monthly featured business spotlight in the Chamber newsletter</li>
+      <li>Complimentary access to two executive leadership roundtables per year</li>
+    </ul>
+  </dialog>
+
+  <dialog id="modal-gold" class="benefit-modal" aria-labelledby="modal-gold-title">
+    <div class="modal-header">
+      <h3 id="modal-gold-title">Gold Membership</h3>
+      <button type="button" class="modal-close" aria-label="Close Gold Membership modal">&times;</button>
+    </div>
+    <p class="modal-cost"><strong>Annual Fee:</strong> ₦350,000 / year</p>
+    <ul>
+      <li>All Silver tier benefits included</li>
+      <li>Rotating homepage spotlight placement on the Chamber website</li>
+      <li>50% discount on all event sponsorships, booths, and training programs</li>
+      <li>VIP invitations to annual Governor &amp; Industry Policy Luncheons</li>
+      <li>Dedicated promotional feature across Chamber social channels</li>
+    </ul>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>Jos Chamber of Commerce</strong>
+        <p>14 Yakubu Gowon Way, Jos, Plateau State, Nigeria</p>
+        <p>info@joschamber.org &bull; +234 800 555 0199</p>
+      </div>
+      <div class="footer-meta">
+        <p>WDD 231 Class Project &bull; Nanlung Micheal Longtau</p>
+        <p>&copy; <span id="current-year"></span> Jos Chamber of Commerce</p>
+        <p id="last-modified"></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
