@@ -1,15 +1,19 @@
-/* Import Google Fonts */
 :root {
     --primary-color: #2c3e50;
     --secondary-color: #117a65;
+    --accent-color: #f39c12;
+    --danger-color: #c0392b;
     --text-color: #333333;
+    --muted-color: #555555;
     --bg-color: #f4f4f4;
     --card-bg: #ffffff;
+    --border-color: #dddddd;
+    --input-border: #bbbbbb;
+    --overlay-bg: #1e2b38;
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Roboto', sans-serif;
 }
 
-/* Base Styles */
 * {
     box-sizing: border-box;
 }
@@ -19,7 +23,6 @@ body {
     color: var(--text-color);
     background-color: var(--bg-color);
     margin: 0;
-    padding: 0;
 }
 
 h1, h2, h3 {
@@ -27,65 +30,62 @@ h1, h2, h3 {
     color: var(--primary-color);
 }
 
-/* Header & Logo */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Header & Navigation */
 header {
     background-color: var(--primary-color);
-    color: #ffffff;
+    color: var(--card-bg);
     padding: 1rem;
     position: relative;
 }
 
 .logo-box {
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 1rem;
     padding-right: 2.5rem;
-    text-align: left;
 }
 
 header img {
     width: 60px;
     height: auto;
-    flex-shrink: 0;
 }
 
 header .site-title {
     font-family: var(--font-heading);
     font-weight: 700;
-    color: #ffffff;
     font-size: 1.25rem;
     margin: 0;
 }
 
-/* Small View Navigation */
 #menu {
     font-size: 1.5rem;
     border: 0;
     background: none;
-    color: #ffffff;
+    color: var(--card-bg);
     position: absolute;
     top: 1.5rem;
     right: 1rem;
     cursor: pointer;
 }
 
-#menu::before {
-    content: "☰";
-}
-
-#menu.open::before {
-    content: "❌";
-}
+#menu::before { content: "☰"; }
+#menu.open::before { content: "❌"; }
 
 .navigation {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     list-style: none;
     padding: 0;
-    margin: 1rem 0 0 0;
-    background-color: var(--primary-color);
+    margin: 1rem 0 0;
 }
 
 .navigation a {
@@ -93,44 +93,73 @@ header .site-title {
     padding: 1rem;
     text-align: center;
     text-decoration: none;
-    color: #ffffff;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--card-bg);
+    border-top: 1px solid var(--muted-color);
 }
 
 .navigation a:hover {
     background-color: var(--secondary-color);
-    color: #ffffff;
     font-weight: 700;
 }
 
-.open a {
-    display: block;
-}
+.open a { display: block; }
+.active::before { content: "📍 "; }
 
-.active::before {
-    content: "📍 ";
-}
-
-/* Main Content & View Toggles */
+/* Main & Shared Card Surface */
 main {
     padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-main h1 {
+main h1,
+.page-intro,
+.view-toggles,
+.spotlights-section h2 {
     text-align: center;
 }
 
-.view-toggles {
-    text-align: center;
-    margin-bottom: 1.5rem;
+.member-card,
+.info-card,
+.spotlight-card,
+.form-panel,
+.level-card,
+.thankyou-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
 }
+
+/* Shared Primary Action Buttons */
+.cta-btn,
+.btn-submit,
+.btn-return {
+    display: inline-block;
+    padding: 0.7rem 1.25rem;
+    background-color: var(--secondary-color);
+    color: var(--card-bg);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.cta-btn:hover,
+.btn-submit:hover,
+.btn-return:hover {
+    background-color: var(--primary-color);
+}
+
+/* Directory Page */
+.view-toggles { margin-bottom: 1.5rem; }
 
 .view-toggles button {
     padding: 0.5rem 1.5rem;
     margin: 0 0.5rem;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
     color: var(--primary-color);
     background-color: var(--card-bg);
@@ -141,95 +170,47 @@ main h1 {
 .view-toggles button:hover,
 .view-toggles button[aria-pressed="true"] {
     background-color: var(--secondary-color);
-    color: #ffffff;
+    color: var(--card-bg);
     border-color: var(--secondary-color);
 }
 
-/* Directory Views - Mobile Baseline */
-#members-container {
+#members-container,
+.home-info-grid,
+.spotlights-grid,
+.join-layout,
+.membership-cards {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.member-card {
-    background-color: var(--card-bg);
-    border: 1px solid #dddddd;
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
+.member-card,
+.spotlight-card { text-align: center; }
 
-.member-card img {
+.member-card img,
+.spotlight-card img {
     width: 180px;
     height: 100px;
     object-fit: contain;
     display: block;
-    margin: 0 auto 0.5rem auto;
+    margin: 0 auto 0.5rem;
 }
 
-.member-card h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
-}
+.member-card p,
+.spotlight-card p,
+.event-item p { margin: 0.25rem 0; }
 
-.member-card p {
-    margin: 0.25rem 0;
-}
-
-.member-card a {
+.member-card a,
+.spotlight-card a {
     color: var(--secondary-color);
-    text-decoration: underline;
     font-weight: 500;
     word-break: break-all;
 }
 
-/* List View */
-.list-view .member-card {
-    text-align: left;
-    padding: 1rem;
-}
+.list-view .member-card { text-align: left; }
+.list-view .member-card img { display: none; }
 
-.list-view .member-card img {
-    display: none;
-}
-
-/* Footer */
-footer {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    padding: 2rem 1rem;
-    text-align: center;
-    margin-top: 2rem;
-}
-
-footer address {
-    font-style: normal;
-    line-height: 1.6;
-}
-
-footer address a {
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-footer p {
-    margin: 0.25rem 0;
-    font-size: 0.9rem;
-}
-/* ==========================================
-   Accessible Focus Indicators
-   ========================================== */
-a:focus-visible,
-button:focus-visible {
-    outline: 3px solid #f39c12;
-    outline-offset: 2px;
-}
-
-/* ==========================================
-   Home Page Styles (Mobile-First)
-   ========================================== */
+/* Home Page */
 .hero {
     position: relative;
     margin-bottom: 1.5rem;
@@ -246,7 +227,8 @@ button:focus-visible {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(44, 62, 80, 0.72);
+    background-color: var(--overlay-bg);
+    opacity: 0.88;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -256,69 +238,19 @@ button:focus-visible {
 }
 
 .hero-overlay h1 {
-    color: #ffffff;
+    color: var(--card-bg);
     font-size: 1.25rem;
-    margin: 0 0 0.65rem 0;
+    margin: 0 0 0.65rem;
 }
 
-.cta-btn {
-    display: inline-block;
-    background-color: var(--secondary-color);
-    color: #ffffff;
-    padding: 0.5rem 1.1rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 700;
-    border: 2px solid #ffffff;
-}
-
-.cta-btn:hover {
-    background-color: var(--primary-color);
-}
-
-/* Events & Weather Cards */
-.home-info-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.info-card {
-    background-color: var(--card-bg);
-    border: 1px solid #dddddd;
-    border-radius: 8px;
-    padding: 1.25rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.info-card h2 {
+.info-card h2,
+.form-section legend,
+.modal-header {
     margin-top: 0;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.45rem;
     border-bottom: 2px solid var(--secondary-color);
-    font-size: 1.25rem;
 }
 
-.event-item {
-    margin-bottom: 1rem;
-}
-
-.event-item:last-child {
-    margin-bottom: 0;
-}
-
-.event-item h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.05rem;
-}
-
-.event-item p {
-    margin: 0.2rem 0;
-    font-size: 0.95rem;
-}
-
-/* Weather Formatting */
 .weather-main {
     display: flex;
     align-items: center;
@@ -332,139 +264,36 @@ button:focus-visible {
     margin: 0;
 }
 
-.weather-desc {
-    text-transform: capitalize;
-    font-weight: 500;
-    margin: 0.25rem 0;
-}
-
 .forecast-row {
     display: flex;
     justify-content: space-between;
     padding: 0.6rem 0;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.forecast-row:last-child {
-    border-bottom: none;
-}
+.forecast-row:last-child { border-bottom: none; }
 
-/* Member Spotlights */
-.spotlights-section h2 {
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.spotlights-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.spotlight-card {
-    background-color: var(--card-bg);
-    border: 1px solid #dddddd;
-    border-radius: 8px;
-    padding: 1.25rem;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.spotlight-header {
-    border-bottom: 1px solid #eeeeee;
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.75rem;
-}
-
-.spotlight-header h3 {
-    margin: 0 0 0.35rem 0;
-    font-size: 1.2rem;
-}
-
-.membership-badge {
+.membership-badge,
+.status-badge {
     display: inline-block;
     padding: 0.2rem 0.65rem;
     border-radius: 4px;
     font-size: 0.8rem;
     font-weight: 700;
-}
-
-.badge-gold {
-    background-color: var(--primary-color);
-    color: #ffffff;
-}
-
-.badge-silver {
+    color: var(--card-bg);
     background-color: var(--secondary-color);
-    color: #ffffff;
 }
 
-.spotlight-card img {
-    width: 180px;
-    height: 100px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto 0.75rem auto;
-}
+.badge-gold { background-color: var(--primary-color); }
 
-.spotlight-card p {
-    margin: 0.3rem 0;
-    font-size: 0.95rem;
-}
-
-.spotlight-card a {
-    color: var(--secondary-color);
-    text-decoration: underline;
-    font-weight: 500;
-}
-
-
-/* ==========================================
-   Join & Thank You Pages (Mobile-First)
-   ========================================== */
-.page-intro {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-/* Mobile Layout: Form stacked above the 4 membership cards */
-.join-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* Form Box (matches .info-card style) */
-.form-panel {
-    background-color: var(--card-bg);
-    border: 1px solid #dddddd;
-    border-radius: 8px;
-    padding: 1.25rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.form-note {
-    font-size: 0.9rem;
-    margin-top: 0;
-}
-
-.req-star {
-    color: #c0392b;
-    font-weight: 700;
-}
+/* Join & Thank You Pages */
+.req-star { color: var(--danger-color); }
 
 .form-section {
-    border: 1px solid #dddddd;
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 1rem;
-    margin: 0 0 1.25rem 0;
-}
-
-.form-section legend {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    color: var(--primary-color);
-    padding: 0 0.5rem;
+    margin: 0 0 1.25rem;
 }
 
 .membership-form label {
@@ -478,17 +307,13 @@ button:focus-visible {
 .field-hint {
     font-weight: 400;
     font-size: 0.85rem;
-    color: #555555;
-}
-
-.field-hint {
+    color: var(--muted-color);
     display: block;
-    margin-top: 0.25rem;
 }
 
-.membership-form input[type="text"],
-.membership-form input[type="email"],
-.membership-form input[type="tel"],
+.optional-tag { display: inline; }
+
+.membership-form input:not([type="submit"]),
 .membership-form select,
 .membership-form textarea {
     display: block;
@@ -497,15 +322,14 @@ button:focus-visible {
     margin-top: 0.35rem;
     font-family: var(--font-body);
     font-size: 1rem;
-    border: 1px solid #bbbbbb;
+    border: 1px solid var(--input-border);
     border-radius: 6px;
-    background-color: #ffffff;
+    background-color: var(--card-bg);
 }
 
-/* Required & Valid Visual Indicators (Advanced Forms Pattern) */
 .membership-form input:required,
 .membership-form select:required {
-    border-left: 5px solid #c0392b;
+    border-left: 5px solid var(--danger-color);
 }
 
 .membership-form input:required:valid,
@@ -513,169 +337,83 @@ button:focus-visible {
     border-left: 5px solid var(--secondary-color);
 }
 
-.btn-submit {
-    width: 100%;
-    padding: 0.75rem;
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    font-weight: 700;
-    color: #ffffff;
-    background-color: var(--secondary-color);
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.btn-submit:hover {
-    background-color: var(--primary-color);
-}
-
-/* 4 Membership Cards with Initial Load Animation */
-.membership-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.membership-cards h2 {
-    margin: 0;
-    text-align: center;
-}
+.btn-submit { width: 100%; }
 
 @keyframes cardFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .level-card {
-    background-color: var(--card-bg);
-    border: 1px solid #dddddd;
     border-left: 5px solid var(--secondary-color);
-    border-radius: 8px;
-    padding: 1.25rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     animation: cardFadeIn 0.6s ease-out;
-}
-
-.level-card h3 {
-    margin: 0 0 0.25rem 0;
-}
-
-.level-price {
-    margin: 0 0 0.75rem 0;
-    font-size: 0.9rem;
 }
 
 .card-link {
     display: inline-block;
     padding: 0.45rem 0.9rem;
     background-color: var(--primary-color);
-    color: #ffffff;
+    color: var(--card-bg);
     text-decoration: none;
     border-radius: 4px;
     font-size: 0.9rem;
     font-weight: 700;
 }
 
-.card-link:hover {
-    background-color: var(--secondary-color);
-}
+.card-link:hover { background-color: var(--secondary-color); }
 
-/* HTML Dialog Modals */
 .benefit-modal {
     width: 90%;
     max-width: 450px;
     padding: 1.5rem;
-    border: 1px solid #dddddd;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     background-color: var(--card-bg);
 }
 
 .benefit-modal::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--overlay-bg);
+    opacity: 0.7;
 }
 
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid var(--secondary-color);
-    padding-bottom: 0.5rem;
     margin-bottom: 0.75rem;
 }
 
-.modal-header h3 {
-    margin: 0;
-}
+.modal-header h3 { margin: 0; }
 
 .modal-close {
     font-size: 1.25rem;
     background: none;
-    border: 1px solid #cccccc;
+    border: 1px solid var(--input-border);
     border-radius: 4px;
     padding: 0.2rem 0.6rem;
     cursor: pointer;
 }
 
-.modal-cost {
+.modal-cost,
+.submission-summary {
     background-color: var(--bg-color);
-    padding: 0.5rem;
-    border-radius: 4px;
+    padding: 0.75rem;
+    border-radius: 6px;
 }
 
-/* Thank You Page */
 .thankyou-card {
     max-width: 600px;
     margin: 0 auto;
-    background-color: var(--card-bg);
-    border: 1px solid #dddddd;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.status-badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background-color: var(--secondary-color);
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 0.85rem;
-    border-radius: 4px;
-}
-
-.thankyou-card h1 {
-    text-align: left;
-    margin: 0.75rem 0 0.5rem 0;
-}
-
-.submission-summary {
-    background-color: var(--bg-color);
-    border: 1px solid #dddddd;
-    border-radius: 6px;
-    padding: 1rem;
-    margin: 1rem 0;
-}
-
-.submission-summary h2 {
-    margin-top: 0;
-    font-size: 1.1rem;
-}
+.thankyou-card h1 { text-align: left; }
 
 .detail-item {
     padding: 0.5rem 0;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.detail-item:last-child {
-    border-bottom: none;
-}
+.detail-item:last-child { border-bottom: none; }
 
 .detail-item dt {
     font-weight: 700;
@@ -683,20 +421,17 @@ button:focus-visible {
     font-size: 0.85rem;
 }
 
-.detail-item dd {
-    margin: 0.2rem 0 0 0;
-}
+.detail-item dd { margin: 0.2rem 0 0; }
 
-.btn-return {
-    display: inline-block;
-    padding: 0.65rem 1.25rem;
-    background-color: var(--secondary-color);
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 700;
-    border-radius: 6px;
-}
-
-.btn-return:hover {
+/* Footer */
+footer {
     background-color: var(--primary-color);
+    color: var(--card-bg);
+    padding: 2rem 1rem;
+    text-align: center;
+    margin-top: 2rem;
 }
+
+footer address { font-style: normal; line-height: 1.6; }
+footer address a { color: var(--card-bg); }
+footer p { margin: 0.25rem 0; font-size: 0.9rem; }
